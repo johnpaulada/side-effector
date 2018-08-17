@@ -1,7 +1,7 @@
 {
   "name": "side-effector",
   "version": "0.1.0",
-  "description": "An Effect functor implementation from James Sinclair's blog post.",
+  "description": "An Effect monad implementation from James Sinclair's blog post.",
   "main": "index.js",
   "module": "index.mjs",
   "browser": "side-effector.min.js",
