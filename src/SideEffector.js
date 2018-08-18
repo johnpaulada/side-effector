@@ -2,11 +2,11 @@
 
 type SideEffect = {
     of: (any) => SideEffect,
-    map: Function,
-    run: Function,
-    join: Function,
-    chain: Function,
-    ap: Function
+    map: ((any) => any) => SideEffect,
+    run: (any) => any,
+    join: (any) => any,
+    chain: ((any) => any) => SideEffect,
+    ap: (SideEffect) => SideEffect
 }
 
 /**
@@ -16,13 +16,13 @@ type SideEffect = {
  * 
  * @param {Function} f 
  */
-const SideEffector = (f: (any) => any) => ({
+const SideEffector = (f: (any) => any): SideEffect => ({
     of: (x: any): SideEffect => SideEffector(() => x),
-    map: (g: (any) => any): SideEffect => SideEffector(x => g(f(x))),
-    run: (x: (any) => any) => f(x),
-    join: (x: (any) => any) => f(x),
+    map: (g: (any) => any): SideEffect => SideEffector((x: any): any => g(f(x))),
+    run: (x: any): any => f(x),
+    join: (x: any): any => f(x),
     chain: (g: (any) => any): SideEffect => SideEffector(f).map(g).join(),
-    ap: (eff: SideEffect): SideEffect => eff.map(g => g(f()))
+    ap: (eff: SideEffect): SideEffect => eff.map((g: (any) => any): any => g(f()))
 })
 
 export default SideEffector

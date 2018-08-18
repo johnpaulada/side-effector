@@ -10,8 +10,7 @@
     "prepublishOnly": "rollup -c"
   },
   "keywords": [
-    "side",
-    "effect",
+    "side-effect",
     "functor",
     "effect",
     "monad"
