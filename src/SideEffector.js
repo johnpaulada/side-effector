@@ -1,7 +1,6 @@
 // @flow
 
 type SideEffect = {
-    of: (any) => SideEffect,
     map: ((any) => any) => SideEffect,
     run: (any) => any,
     join: (any) => any,
@@ -17,7 +16,6 @@ type SideEffect = {
  * @param {Function} f 
  */
 const SideEffector = (f: (any) => any): SideEffect => ({
-    of: (x: any): SideEffect => SideEffector(() => x),
     map: (g: (any) => any): SideEffect => SideEffector((x: any): any => g(f(x))),
     run: (x: any): any => f(x),
     join: (x: any): any => f(x),
